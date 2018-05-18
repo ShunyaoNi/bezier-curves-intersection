@@ -10,13 +10,24 @@ function Point(x, y) {
 function checkValidity(point) {
     for(i = 0; i < controlPoints.length; i++) {
 
-        var v = {
+        let v = {
             x: controlPoints[i].x - point.x,
             y: controlPoints[i].y - point.y
         }
 
         if(Math.sqrt(v.x * v.x + v.y * v.y) <= radius)
-            return false;     
-    }
+            return i;
+    } 
     return true;
+}
+
+function insertPoint(point) {
+    if(checkValidity(point) === true)
+        controlPoints.push(point);
+}
+
+function removePoint(point) {
+    let index = checkValidity(point);
+    if(index !== true)
+        controlPoints.splice(index, 1);
 }
