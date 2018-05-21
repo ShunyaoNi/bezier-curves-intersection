@@ -19,6 +19,8 @@ document.addEventListener("contextmenu", e => {
     let point = new Point(e.offsetX, e.offsetY);
     removePoint(point);
     draw();
+
+    bezierPoints = [];
 });
 
 document.addEventListener("keypress", e => {
