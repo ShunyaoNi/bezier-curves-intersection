@@ -6,10 +6,11 @@ canvas.setAttribute("height", window.innerHeight);
 
 // Adiciona um ponto de controle na tela.
 document.addEventListener("click", e => {
-
     let point = new Point(e.offsetX, e.offsetY);
     insertPoint(point);
     draw();
+
+    bezierPoints = [];
 });
 
 document.addEventListener("contextmenu", e => {
@@ -18,7 +19,31 @@ document.addEventListener("contextmenu", e => {
     let point = new Point(e.offsetX, e.offsetY);
     removePoint(point);
     draw();
-})
+});
+
+document.addEventListener("keypress", e => {
+    let key = e.which || e.keyCode;
+    if (key === 13) { // Pressionou Enter.
+        for(let i = 0; i <= 1; i += 0.1) {
+            bezierPoints.push(bezierPoint(i));
+        }
+        drawCurve();
+    }
+});
+
+function drawCurve() {
+    ctx.beginPath();
+    ctx.strokeStyle = "red";
+    ctx.moveTo(bezierPoints[0].x, bezierPoints[0].y);
+
+    for (i = 1; i < bezierPoints.length - 2; i ++) {
+        var xc = (bezierPoints[i].x + bezierPoints[i + 1].x) / 2;
+        var yc = (bezierPoints[i].y + bezierPoints[i + 1].y) / 2;
+        ctx.quadraticCurveTo(bezierPoints[i].x, bezierPoints[i].y, xc, yc);
+    }
+    ctx.quadraticCurveTo(bezierPoints[i].x, bezierPoints[i].y, bezierPoints[i+1].x,bezierPoints[i+1].y);
+    ctx.stroke();
+}
 
 function draw() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
