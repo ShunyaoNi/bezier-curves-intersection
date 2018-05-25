@@ -15,7 +15,7 @@ document.addEventListener("mousedown", e => {
 
 document.addEventListener("mousemove", e => {
     if(move !== false) {
-        controlPoints[move] = new Point(e.offsetX, e.offsetY);
+        controlPoints[curve][move] = new Point(e.offsetX, e.offsetY);
         draw();
     }
 });
@@ -35,10 +35,8 @@ document.addEventListener("contextmenu", e => {
 // Desenhar a curva.
 document.addEventListener("keypress", e => {
     let key = e.which || e.keyCode;
-    if (key === 13) { // Pressionou Enter.
-        for(let i = 0; i <= 1; i += 0.01) {
-            bezierPoints.push(bezierPoint(i));
-        }
-        drawCurve();
-    }
+    if (key === 49) // Pressionou Enter.
+        curve = 0;
+    else if(key === 50)
+        curve = 1;
 });
