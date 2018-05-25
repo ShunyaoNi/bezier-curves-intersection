@@ -8,6 +8,7 @@ document.addEventListener("click", e => {
 });
 
 // Permite mover um ponto ao clicar e arrastar.
+var move = false;
 document.addEventListener("mousedown", e => {
     move = checkProximity(new Point(e.offsetX, e.offsetY));
 });

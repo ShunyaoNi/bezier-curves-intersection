@@ -45,6 +45,6 @@ function drawLine(initialX, finalX, initialY, finalY) {
 
 function getCurvePoints() {
     bezierPoints = [];
-    for(let t = 0; t < 1; t += 0.01)
+    for(let t = 0; t < 1; t += 0.1)
         bezierPoints.push(bezierPoint(t));
 }

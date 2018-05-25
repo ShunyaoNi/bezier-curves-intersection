@@ -3,8 +3,11 @@
 function bezierPoint(t) {
     
     let curvePoint = new Point(0, 0);
+    let bernsteinCoefficient;
     for(let i = 0; i < controlPoints.length; i++) {
-        curvePoint = addition(curvePoint, multiplication(Bernstein(i, t), controlPoints[i]));
+        bernstein = Bernstein(i, t);
+        curvePoint.x += bernsteinCoefficient * controlPoints[i].x;
+        curvePoint.y += bernsteinCoefficient * controlPoints[i].y;
     }
     return curvePoint;
 }

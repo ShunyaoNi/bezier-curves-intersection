@@ -32,11 +32,3 @@ function removePoint(point) {
     if(index !== false)
         controlPoints.splice(index, 1);
 }
-
-function addition(point1, point2) {
-    return new Point(point1.x + point2.x, point1.y + point2.y);
-}
-
-function multiplication(escalar, point1) {
-    return new Point(escalar * point1.x, escalar * point1.y);
-}
