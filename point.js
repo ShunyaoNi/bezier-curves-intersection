@@ -29,7 +29,7 @@ function insertPoint(point) {
 
 function removePoint(point) {
     let index = checkProximity(point);
-    if(index !== true)
+    if(index !== false)
         controlPoints.splice(index, 1);
 }
 
