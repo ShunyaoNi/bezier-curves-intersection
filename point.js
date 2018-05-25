@@ -1,4 +1,4 @@
-const radius = 5;
+const radius = 4;
 var controlPoints = [];
 var bezierPoints = [];
 
@@ -19,11 +19,11 @@ function checkProximity(point) {
         if(Math.sqrt(v.x * v.x + v.y * v.y) <= radius)
             return i;
     } 
-    return true;
+    return false;
 }
 
 function insertPoint(point) {
-    if(checkProximity(point) === true)
+    if(checkProximity(point) === false)
         controlPoints.push(point);
 }
 

@@ -6,18 +6,43 @@ canvas.setAttribute("height", window.innerHeight);
 
 // Adiciona um ponto de controle na tela.
 document.addEventListener("click", e => {
-    let point = new Point(e.offsetX, e.offsetY);
-    insertPoint(point);
+    insertPoint({
+        x: e.offsetX,
+        y: e.offsetY
+    });
     draw();
 
     bezierPoints = [];
 });
 
+document.addEventListener("mousedown", e => {
+    move = checkProximity({
+        x: e.offsetX,
+        y: e.offsetY
+    });
+});
+
+document.addEventListener("mousemove", e => {
+    if(move !== false) {
+        controlPoints[move] = {
+            x: e.offsetX,
+            y: e.offsetY
+        };
+        draw();
+    }
+});
+
+document.addEventListener("mouseup", e => {
+    move = false;
+});
+
 document.addEventListener("contextmenu", e => {
     e.preventDefault();
 
-    let point = new Point(e.offsetX, e.offsetY);
-    removePoint(point);
+    removePoint({
+        x: e.offsetX,
+        y: e.offsetY
+    });
     draw();
 
     bezierPoints = [];
@@ -26,7 +51,7 @@ document.addEventListener("contextmenu", e => {
 document.addEventListener("keypress", e => {
     let key = e.which || e.keyCode;
     if (key === 13) { // Pressionou Enter.
-        for(let i = 0; i <= 1; i += 0.1) {
+        for(let i = 0; i <= 1; i += 0.01) {
             bezierPoints.push(bezierPoint(i));
         }
         drawCurve();
