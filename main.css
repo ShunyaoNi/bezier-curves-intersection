@@ -2,3 +2,44 @@ body {
     background-color: black;
     margin: 0;
 }
+
+nav {
+    height: 28px;
+    background-color: white;
+}
+
+nav a {
+    padding: 2px 10px;
+    text-decoration: none;
+    display: inline-block;
+    background-color: #3399ff;
+    color: #5a2e2e;
+    border-radius: 5px;
+  }
+  nav a:hover {
+    color: #e6e6e6;
+    background-color: #1a8cff;
+  }
+
+button {
+    border-style: none;
+    height: 100%;
+    font-weight: bold;
+    margin-right: 5px;
+}
+
+button#curva1 {
+    background-color: red;
+    color: white;
+}
+
+button#curva2 {
+    background-color: green;
+    color: yellow;
+    margin-left: 20px;
+}
+
+canvas {
+    padding: 0;
+    border: 0;
+}

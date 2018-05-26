@@ -1,4 +1,3 @@
-
 // Algoritmo de De Casteljau
 function bezierPoint(t) {
     

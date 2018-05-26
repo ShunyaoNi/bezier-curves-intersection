@@ -7,6 +7,21 @@
     <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
 </head>
 <body>
+    <nav id="menu">
+        <button id="curva1">CURVA 1</button>
+        Iterações:
+        <input type="text" />
+        <input type="checkbox" onchange="drawPoints[0] = !drawPoints[0]; draw();" checked />Pontos
+        <input type="checkbox" onchange="drawPolygons[0] = !drawPolygons[0]; draw();" checked />Polígono
+        <input type="checkbox" onchange="drawCurves[0] = !drawCurves[0]; draw();" checked />Curva
+        <button id="curva2">CURVA 2</button>
+        Iterações:
+        <input type="text" />
+        <input type="checkbox" onchange="drawPoints[1] = !drawPoints[1]; draw();" checked />Pontos
+        <input type="checkbox" onchange="drawPolygons[1] = !drawPolygons[1]; draw();"checked />Polígono
+        <input type="checkbox" onchange="drawCurves[1] = !drawCurves[1]; draw();" checked />Curva
+    </nav>
+
     <canvas id="canvas"></canvas>
     <script src="main.js"></script>
     <script src="point.js"></script>

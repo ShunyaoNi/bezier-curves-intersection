@@ -1,3 +1,7 @@
+var drawPoints = [true, true];
+var drawPolygons = [true, true];
+var drawCurves = [true, true];
+
 // Adiciona um ponto de controle na tela.
 document.addEventListener("click", e => {
     insertPoint({

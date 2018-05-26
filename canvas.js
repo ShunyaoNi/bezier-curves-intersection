@@ -2,25 +2,34 @@ var canvas = document.getElementById("canvas");
 var ctx = canvas.getContext("2d");
 
 canvas.setAttribute("width", window.innerWidth);
-canvas.setAttribute("height", window.innerHeight);
+canvas.setAttribute("height", window.innerHeight - 28);
 
-function drawCurve() {
+function drawCurve(j) {
     getCurvePoints();
+    prepareContext("red", "yellow", j);
 
-    for(j = 0; j <= 1; j++) {
-        prepareContext("red", "yellow", j);
+    if(bezierPoints[j].length > 0) {
+        ctx.moveTo(bezierPoints[j][0].x, bezierPoints[j][0].y);
 
-        if(bezierPoints[j].length > 0) {
-            ctx.moveTo(bezierPoints[j][0].x, bezierPoints[j][0].y);
-
-            for (i = 1; i < bezierPoints[j].length - 2; i ++) {
-                var xc = (bezierPoints[j][i].x + bezierPoints[j][i + 1].x) / 2;
-                var yc = (bezierPoints[j][i].y + bezierPoints[j][i + 1].y) / 2;
-                ctx.quadraticCurveTo(bezierPoints[j][i].x, bezierPoints[j][i].y, xc, yc);
-            }
-            ctx.quadraticCurveTo(bezierPoints[j][i].x, bezierPoints[j][i].y, bezierPoints[j][i+1].x,bezierPoints[j][i+1].y);
-            ctx.stroke();
+        for (i = 1; i < bezierPoints[j].length - 2; i ++) {
+            var xc = (bezierPoints[j][i].x + bezierPoints[j][i + 1].x) / 2;
+            var yc = (bezierPoints[j][i].y + bezierPoints[j][i + 1].y) / 2;
+            ctx.quadraticCurveTo(bezierPoints[j][i].x, bezierPoints[j][i].y, xc, yc);
         }
+        ctx.quadraticCurveTo(bezierPoints[j][i].x, bezierPoints[j][i].y, bezierPoints[j][i+1].x,bezierPoints[j][i+1].y);
+        ctx.stroke();
+    }
+}
+
+function drawPolygon(j) {
+    for(i = 0; i < controlPoints[j].length; i++) {
+        ctx.beginPath();
+        if(drawPoints[j])
+            ctx.arc(controlPoints[j][i].x, controlPoints[j][i].y, radius, 0, 2 * Math.PI);
+        if(i < controlPoints[j].length - 1 && drawPolygons[j]) 
+            drawLine(controlPoints[j][i].x, controlPoints[j][i + 1].x, controlPoints[j][i].y, controlPoints[j][i + 1].y);
+        ctx.stroke();
+        ctx.fill();
     }
 }
 
@@ -31,17 +40,10 @@ function draw() {
     
     for(j = 0; j <= 1; j++) {
         prepareContext("white", "green", j);
-
-        for(i = 0; i < controlPoints[j].length; i++) {
-            ctx.beginPath();
-            ctx.arc(controlPoints[j][i].x, controlPoints[j][i].y, radius, 0, 2 * Math.PI);
-            if(i < controlPoints[j].length - 1) 
-                drawLine(controlPoints[j][i].x, controlPoints[j][i + 1].x, controlPoints[j][i].y, controlPoints[j][i + 1].y);
-            ctx.stroke();
-            ctx.fill();
-        }
+        drawPolygon(j);
+        if(drawCurves[j])
+            drawCurve(j);  
     }
-    drawCurve();   
 }
 
 function prepareContext(color1, color2, index) {

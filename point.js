@@ -24,7 +24,7 @@ function checkProximity(point) {
 }
 
 function insertPoint(point) {
-    if(checkProximity(point) === false)
+    if(checkProximity(point) === false && point.y >= 28)
         controlPoints[curve].push(point);
 }
 
