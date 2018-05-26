@@ -4,6 +4,12 @@ var ctx = canvas.getContext("2d");
 canvas.setAttribute("width", window.innerWidth);
 canvas.setAttribute("height", window.innerHeight - 28);
 
+var drawPoints = [true, true];
+var drawPolygons = [true, true];
+var drawCurves = [true, true];
+
+var inputs = document.getElementsByClassName("iterations");
+
 function drawCurve(j) {
     getCurvePoints();
     prepareContext("red", "yellow", j);
@@ -61,7 +67,7 @@ function drawLine(initialX, finalX, initialY, finalY) {
 
 function getCurvePoints() {
     bezierPoints[curve] = [];
-    for(let t = 0; t <= 1; t += 0.1) {
+    for(let t = 0; t <= 1; t += 1/inputs[curve].value) {
         bezierPoints[curve].push(bezierPoint(t));
     }
 }
