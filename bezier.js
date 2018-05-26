@@ -45,3 +45,18 @@ function findExtremes(curve) {
     
     return [least[0], least[1], highest[0], highest[1]];
 }
+
+// Interseção de curvas.
+function intersect(curve1, curve2) {
+    if(!overlap(calculateBoundingBox(curve1), calculateBoundingBox(curve2)))
+        return false;
+}
+
+function overlap(boundingBox1, boundingBox2) {
+    return overlapCondition(boundingBox1, boundingBox2, 0) && overlapCondition(boundingBox1, boundingBox2, 1);
+}
+
+function overlapCondition(boundingBox1, boundingBox2, i) {
+    return Math.abs(boundingBox1[i] + boundingBox1[i + 2] - boundingBox2[i] - boundingBox2[i + 2]) <=
+        (boundingBox1[i + 2] - boundingBox1[i] + boundingBox2[i + 2] - boundingBox2[i]);
+}
