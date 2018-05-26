@@ -25,3 +25,23 @@ function factorial(n) {
         return 1;
     return n * factorial(n - 1);
 }
+
+// Calculando a bounding box da curva (pontos extremos a partir da esquerda em sentido horário).
+function calculateBoundingBox(curve) {
+    var boundingBox = findExtremes(curve);
+    return boundingBox;
+}
+
+function findExtremes(curve) {
+    var least = [10000, 10000];
+    var highest = [0, 0];
+
+    for(let i = 0; i < curve.length; i++) {
+        least[0] = Math.min(least[0], curve[i].x);
+        least[1] = Math.min(least[1], curve[i].y);
+        highest[0] = Math.max(highest[0], curve[i].x);
+        highest[1] = Math.max(highest[1], curve[i].y);
+    }
+    
+    return [least[0], least[1], highest[0], highest[1]];
+}
