@@ -17,12 +17,9 @@ function drawCurve(j) {
     if(bezierPoints[j].length > 0) {
         ctx.moveTo(bezierPoints[j][0].x, bezierPoints[j][0].y);
 
-        for (i = 1; i < bezierPoints[j].length - 2; i ++) {
-            var xc = (bezierPoints[j][i].x + bezierPoints[j][i + 1].x) / 2;
-            var yc = (bezierPoints[j][i].y + bezierPoints[j][i + 1].y) / 2;
-            ctx.quadraticCurveTo(bezierPoints[j][i].x, bezierPoints[j][i].y, xc, yc);
-        }
-        ctx.quadraticCurveTo(bezierPoints[j][i].x, bezierPoints[j][i].y, bezierPoints[j][i+1].x,bezierPoints[j][i+1].y);
+        for(i = 0; i < bezierPoints[j].length - 1; i++)
+            ctx.lineTo(bezierPoints[j][i + 1].x, bezierPoints[j][i + 1].y);
+        ctx.lineTo(controlPoints[j][controlPoints[j].length - 1].x, controlPoints[j][controlPoints[j].length - 1].y);
         ctx.stroke();
     }
 }
