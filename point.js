@@ -1,6 +1,5 @@
 const radius = 4;
 var controlPoints = [[],[]];
-var bezierPoints = [[],[]];
 var curve = 0;
 
 function Point(x, y) {
@@ -32,4 +31,12 @@ function removePoint(point) {
     let index = checkProximity(point);
     if(index !== false)
         controlPoints[curve].splice(index, 1);
+}
+
+function addition(point1, point2) {
+    return new Point(point1.x + point2.x, point1.y + point2.y);
+}
+
+function multiplication(point, scalar) {
+    return new Point(point.x * scalar, point.y * scalar);
 }

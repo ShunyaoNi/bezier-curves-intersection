@@ -11,14 +11,14 @@ var drawCurves = [true, true];
 var inputs = document.getElementsByClassName("iterations");
 
 function drawCurve(j) {
-    getCurvePoints();
+    let curve = getCurvePoints(controlPoints[j], inputs[j].value);
     prepareContext("red", "yellow", j);
 
-    if(bezierPoints[j].length > 0) {
-        ctx.moveTo(bezierPoints[j][0].x, bezierPoints[j][0].y);
+    if(curve.length > 0) {
+        ctx.moveTo(curve[0].x, curve[0].y);
 
-        for(i = 0; i < bezierPoints[j].length - 1; i++)
-            ctx.lineTo(bezierPoints[j][i + 1].x, bezierPoints[j][i + 1].y);
+        for(i = 0; i < curve.length - 1; i++)
+            ctx.lineTo(curve[i + 1].x, curve[i + 1].y);
         ctx.stroke();
     }
 }
@@ -61,10 +61,12 @@ function drawLine(initialX, finalX, initialY, finalY) {
     ctx.lineTo(finalX, finalY);
 }
 
-function getCurvePoints() {
-    bezierPoints[curve] = [];
-    for(let t = 0; t < 1; t += 1/inputs[curve].value) {
-        bezierPoints[curve].push(bezierPoint(t));
+function getCurvePoints(controlPoints, iterations) {
+    let bezierPoints = [];
+    for(let t = 0; t < 1; t += 1/iterations) {
+        bezierPoints.push(deCasteljau(controlPoints, t));
     }
-    bezierPoints[curve].push(bezierPoint(1));
+    bezierPoints.push(deCasteljau(controlPoints, 1));
+    
+    return bezierPoints;
 }
