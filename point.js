@@ -1,5 +1,6 @@
 const radius = 4;
 var controlPoints = [[],[]];
+var bezierPoints = [[],[]];
 var curve = 0;
 
 function Point(x, y) {

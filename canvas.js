@@ -12,6 +12,7 @@ var inputs = document.getElementsByClassName("iterations");
 
 function drawCurve(j) {
     let curve = getCurvePoints(controlPoints[j], inputs[j].value);
+    bezierPoints[j] = curve;
     prepareContext("red", "yellow", j);
 
     if(curve.length > 0) {
