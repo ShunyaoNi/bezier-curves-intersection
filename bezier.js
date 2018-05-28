@@ -52,7 +52,7 @@ function intersect(curve1, curve2) {
 
 // Cálculo da bounding box da curva.
 function calculateBoundingBox(curve) {
-    let boundingBox = findExtremes(getCurvePoints(curve, 2));
+    let boundingBox = findExtremes(curve);
     return boundingBox;
 }
 

@@ -36,6 +36,11 @@ function drawPolygon(j) {
     }
 }
 
+function animate() {
+    requestAnimationFrame(animate);
+    draw();
+}
+
 function draw() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     ctx.fillStyle = "white";
@@ -81,3 +86,5 @@ function getCurvePoints(controlPoints, iterations) {
     
     return bezierPoints;
 }
+
+animate();

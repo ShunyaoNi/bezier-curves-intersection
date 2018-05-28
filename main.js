@@ -4,7 +4,6 @@ document.addEventListener("click", e => {
         x: e.offsetX,
         y: e.offsetY
     });
-    draw();
 });
 
 // Permite mover um ponto ao clicar e arrastar.
@@ -16,7 +15,6 @@ document.addEventListener("mousedown", e => {
 document.addEventListener("mousemove", e => {
     if(move !== false) {
         controlPoints[curve][move] = new Point(e.offsetX, e.offsetY);
-        draw();
     }
 });
 
@@ -29,7 +27,6 @@ document.addEventListener("contextmenu", e => {
     e.preventDefault();
 
     removePoint(new Point(e.offsetX, e.offsetY));
-    draw();
 });
 
 // Desenhar a curva.
