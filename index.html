@@ -20,6 +20,8 @@
         <input type="checkbox" onchange="drawPoints[1] = !drawPoints[1];" checked />Pontos
         <input type="checkbox" onchange="drawPolygons[1] = !drawPolygons[1];"checked />Polígono
         <input type="checkbox" onchange="drawCurves[1] = !drawCurves[1];" checked />Curva
+        &emsp;Tolerância:
+        <input type="text" type="number" value="0.1" oninput="tolerancia = this.value;" />
     </nav>
 
     <canvas id="canvas"></canvas>

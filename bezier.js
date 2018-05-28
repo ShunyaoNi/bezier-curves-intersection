@@ -88,6 +88,7 @@ function subdivide(curve) {
     return [leftSubCurve, rightSubCurve];
 }
 
+var tolerancia = 0.1;
 function smallEnough(boundingBox) {
-    return (boundingBox[2] - boundingBox[0]) * (boundingBox[3] - boundingBox[1]) <= 0.1;
+    return (boundingBox[2] - boundingBox[0]) * (boundingBox[3] - boundingBox[1]) <= tolerancia;
 }
