@@ -47,6 +47,7 @@ function draw() {
         if(drawCurves[j])
             drawCurve(j);  
     }
+    intersect(controlPoints[0], controlPoints[1]);
 }
 
 function prepareContext(color1, color2, index) {
@@ -57,6 +58,15 @@ function prepareContext(color1, color2, index) {
         ctx.strokeStyle = color2;     
 }
 
+function drawIntersectionPoints(x, y) {
+    if(drawCurves[0] || drawCurves[1]) {
+        ctx.beginPath();
+        ctx.fillStyle = "orange";
+        ctx.arc(x, y, radius, 0, 2 * Math.PI);
+        ctx.fill();
+    }
+}
+
 function drawLine(initialX, finalX, initialY, finalY) {
     ctx.moveTo(initialX, initialY);
     ctx.lineTo(finalX, finalY);
@@ -65,9 +75,9 @@ function drawLine(initialX, finalX, initialY, finalY) {
 function getCurvePoints(controlPoints, iterations) {
     let bezierPoints = [];
     for(let t = 0; t < 1; t += 1/iterations) {
-        bezierPoints.push(deCasteljau(controlPoints, t));
+        bezierPoints.push(deCasteljau(controlPoints, [], [], t));
     }
-    bezierPoints.push(deCasteljau(controlPoints, 1));
+    bezierPoints.push(deCasteljau(controlPoints, [], [], 1));
     
     return bezierPoints;
 }
