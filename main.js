@@ -32,8 +32,8 @@ document.addEventListener("contextmenu", e => {
 // Desenhar a curva.
 document.addEventListener("keypress", e => {
     let key = e.which || e.keyCode;
-    if (key === 49) // Pressionou Enter.
+    if (key === 49) // Pressionou 1.
         curve = 0;
-    else if(key === 50)
+    else if(key === 50) // Pressionou 2.
         curve = 1;
 });
