@@ -43,7 +43,7 @@ function intersect(curve1, curve2) {
     for(let i = 0; i < 2; i++) {
         for(let j = 0; j < 2; j++) {
             if(intersect(subcurves1[i], subcurves2[j])) {
-                drawIntersectionPoints(boundingBox1[0], boundingBox1[1]);
+                drawIntersectionPoints((boundingBox1[0] + boundingBox1[2]) / 2, (boundingBox1[1] + boundingBox1[3]) / 2);
             }
         }
     }
