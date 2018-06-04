@@ -43,6 +43,7 @@ function intersect(curve1, curve2) {
     for(let i = 0; i < 2; i++) {
         for(let j = 0; j < 2; j++) {
             if(intersect(subcurves1[i], subcurves2[j])) {
+                //console.log((subcurves1[i][subcurves1[i].length - 2] + subcurves1[i][subcurves1[i].length - 1]) / 2);
                 drawIntersectionPoints((boundingBox1[0] + boundingBox1[2]) / 2, (boundingBox1[1] + boundingBox1[3]) / 2);
             }
         }
@@ -60,7 +61,7 @@ function findExtremes(curve) {
     var least = [10000, 10000];
     var highest = [0, 0];
 
-    for(let i = 0; i < curve.length; i++) {
+    for(let i = 0; i < curve.length - 2; i++) {
         least[0] = Math.min(least[0], curve[i].x);
         least[1] = Math.min(least[1], curve[i].y);
         highest[0] = Math.max(highest[0], curve[i].x);
@@ -83,9 +84,15 @@ function overlapCondition(boundingBox1, boundingBox2, i) {
 function subdivide(curve) {
     let leftSubCurve = [];
     let rightSubCurve = [];
-    deCasteljau(curve, leftSubCurve, rightSubCurve, 0.5);
+
+    let leftParameter = curve[curve.length - 2];
+    let rightParameter = curve[curve.length - 1];
+    deCasteljau(curve.slice(0, curve.length - 2), leftSubCurve, rightSubCurve, 0.5);
     
-    return [leftSubCurve, rightSubCurve];
+    let leftSubCurveParameters = [leftParameter, (leftParameter + rightParameter) / 2];
+    let rightSubCurveParameters = [rightParameter, (leftParameter + rightParameter) / 2]; 
+
+    return [leftSubCurve.concat(leftSubCurveParameters), rightSubCurve.concat(rightSubCurveParameters)];
 }
 
 var tolerancia = 0.1;

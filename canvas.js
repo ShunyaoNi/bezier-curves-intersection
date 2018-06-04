@@ -52,7 +52,7 @@ function draw() {
         if(drawCurves[j])
             drawCurve(j);  
     }
-    intersect(controlPoints[0], controlPoints[1]);
+    intersect(controlPoints[0].concat([0,1]), controlPoints[1].concat([0,1]));
 }
 
 function prepareContext(color1, color2, index) {
