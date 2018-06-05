@@ -38,7 +38,13 @@ button#curva2 {
     color: yellow;
     margin-left: 20px;
 }
+p#T1{
+    color : white;
+}
 
+p#T2{
+    color : white;
+}
 canvas {
     padding: 0;
     border: 0;

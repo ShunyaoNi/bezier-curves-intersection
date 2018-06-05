@@ -1,3 +1,5 @@
+var TC1 = document.getElementById("T1"); //T's para a primeira curva
+var TC2 = document.getElementById("T2"); //T's para a segunda curva
 // Algoritmo de De Casteljau
 function deCasteljau(controlPoints, leftSubCurve, rightSubCurve, t) {
     
@@ -43,7 +45,8 @@ function intersect(curve1, curve2) {
     for(let i = 0; i < 2; i++) {
         for(let j = 0; j < 2; j++) {
             if(intersect(subcurves1[i], subcurves2[j])) {
-                //console.log((subcurves1[i][subcurves1[i].length - 2] + subcurves1[i][subcurves1[i].length - 1]) / 2);
+				TC1.innerHTML = " T1 é: " + ((subcurves1[i][subcurves1[i].length - 2] + subcurves1[i][subcurves1[i].length - 1]) / 2);
+				TC2.innerHTML = " T2 é: " + ((subcurves2[j][subcurves2[j].length - 2] + subcurves2[j][subcurves2[j].length - 1]) / 2);
                 drawIntersectionPoints((boundingBox1[0] + boundingBox1[2]) / 2, (boundingBox1[1] + boundingBox1[3]) / 2);
             }
         }
