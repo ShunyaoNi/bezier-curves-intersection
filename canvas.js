@@ -52,6 +52,7 @@ function draw() {
         if(drawCurves[j])
             drawCurve(j);  
     }
+    intersectionPoints = [[],[]];
     intersect(controlPoints[0].concat([0,1]), controlPoints[1].concat([0,1]));
 }
 

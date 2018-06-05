@@ -1,5 +1,6 @@
-var TC1 = document.getElementById("T1"); //T's para a primeira curva
-var TC2 = document.getElementById("T2"); //T's para a segunda curva
+var TC = document.getElementsByClassName("parameter"); //T's para a primeira curva
+var intersectionPoints = [[],[]];
+
 // Algoritmo de De Casteljau
 function deCasteljau(controlPoints, leftSubCurve, rightSubCurve, t) {
     
@@ -45,8 +46,15 @@ function intersect(curve1, curve2) {
     for(let i = 0; i < 2; i++) {
         for(let j = 0; j < 2; j++) {
             if(intersect(subcurves1[i], subcurves2[j])) {
-				TC1.innerHTML = " T1 é: " + ((subcurves1[i][subcurves1[i].length - 2] + subcurves1[i][subcurves1[i].length - 1]) / 2);
-				TC2.innerHTML = " T2 é: " + ((subcurves2[j][subcurves2[j].length - 2] + subcurves2[j][subcurves2[j].length - 1]) / 2);
+                let parameter1 = ((subcurves1[i][subcurves1[i].length - 2] + subcurves1[i][subcurves1[i].length - 1]) / 2).toFixed(2);
+                let parameter2 = ((subcurves2[j][subcurves2[j].length - 2] + subcurves2[j][subcurves2[j].length - 1]) / 2).toFixed(2);
+                
+                if(!intersectionPoints[0].includes(parameter1))
+                    intersectionPoints[0].push(parameter1);
+                if(!intersectionPoints[1].includes(parameter2))
+                    intersectionPoints[1].push(parameter2);
+
+				addIntersection();
                 drawIntersectionPoints((boundingBox1[0] + boundingBox1[2]) / 2, (boundingBox1[1] + boundingBox1[3]) / 2);
             }
         }
@@ -90,6 +98,7 @@ function subdivide(curve) {
 
     let leftParameter = curve[curve.length - 2];
     let rightParameter = curve[curve.length - 1];
+
     deCasteljau(curve.slice(0, curve.length - 2), leftSubCurve, rightSubCurve, 0.5);
     
     let leftSubCurveParameters = [leftParameter, (leftParameter + rightParameter) / 2];
@@ -101,4 +110,21 @@ function subdivide(curve) {
 var tolerancia = 0.1;
 function smallEnough(boundingBox) {
     return (boundingBox[2] - boundingBox[0]) * (boundingBox[3] - boundingBox[1]) <= tolerancia;
+}
+
+function addIntersection() {
+    var ul = document.getElementsByClassName("parameter");
+    ul[0].innerHTML = "";
+    ul[1].innerHTML = "";
+
+    for(let i = 0; i < intersectionPoints.length; i++) {
+        for(let j = 0; j < intersectionPoints[i].length; j++) {
+            var li = document.createElement("li");
+            li.appendChild(document.createTextNode(i + ": " + intersectionPoints[i][j]));
+            ul[i].appendChild(li);
+        }
+    }
+    
+      
+    //TC[curve].innerHTML = "" + t;
 }
