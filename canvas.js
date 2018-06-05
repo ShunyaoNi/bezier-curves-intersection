@@ -52,6 +52,9 @@ function draw() {
         if(drawCurves[j])
             drawCurve(j);  
     }
+    
+    ul[0].innerHTML = "";
+    ul[1].innerHTML = "";
     intersectionPoints = [[],[]];
     intersect(controlPoints[0].concat([0,1]), controlPoints[1].concat([0,1]));
 }
@@ -64,7 +67,7 @@ function prepareContext(color1, color2, index) {
         ctx.strokeStyle = color2;     
 }
 
-function drawIntersectionPoints(x, y) {
+function drawIntersectionPoint(x, y) {
     if(drawCurves[0] || drawCurves[1]) {
         ctx.beginPath();
         ctx.fillStyle = "orange";

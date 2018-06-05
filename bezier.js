@@ -46,20 +46,23 @@ function intersect(curve1, curve2) {
     for(let i = 0; i < 2; i++) {
         for(let j = 0; j < 2; j++) {
             if(intersect(subcurves1[i], subcurves2[j])) {
-                let parameter1 = ((subcurves1[i][subcurves1[i].length - 2] + subcurves1[i][subcurves1[i].length - 1]) / 2).toFixed(2);
-                let parameter2 = ((subcurves2[j][subcurves2[j].length - 2] + subcurves2[j][subcurves2[j].length - 1]) / 2).toFixed(2);
-                
-                if(!intersectionPoints[0].includes(parameter1))
-                    intersectionPoints[0].push(parameter1);
-                if(!intersectionPoints[1].includes(parameter2))
-                    intersectionPoints[1].push(parameter2);
-
+                pushIntersectionPoints(subcurves1[i], subcurves2[j], i, j);
 				addIntersection();
-                drawIntersectionPoints((boundingBox1[0] + boundingBox1[2]) / 2, (boundingBox1[1] + boundingBox1[3]) / 2);
+                drawIntersectionPoint((boundingBox1[0] + boundingBox1[2]) / 2, (boundingBox1[1] + boundingBox1[3]) / 2);
             }
         }
     }
     return false;
+}
+
+function pushIntersectionPoints(curve1, curve2, i, j) {
+    let parameter1 = ((curve1[curve1.length - 2] + curve1[curve1.length - 1]) / 2).toFixed(2);
+    let parameter2 = ((curve2[curve2.length - 2] + curve2[curve2.length - 1]) / 2).toFixed(2);
+    
+    if(!intersectionPoints[0].includes(parameter1))
+        intersectionPoints[0].push(parameter1);
+    if(!intersectionPoints[1].includes(parameter2))
+        intersectionPoints[1].push(parameter2);
 }
 
 // Cálculo da bounding box da curva.
@@ -112,8 +115,8 @@ function smallEnough(boundingBox) {
     return (boundingBox[2] - boundingBox[0]) * (boundingBox[3] - boundingBox[1]) <= tolerancia;
 }
 
+var ul = document.getElementsByClassName("parameter");
 function addIntersection() {
-    let ul = document.getElementsByClassName("parameter");
     ul[0].innerHTML = "";
     ul[1].innerHTML = "";
 
