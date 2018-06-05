@@ -1,4 +1,4 @@
-var TC = document.getElementsByClassName("parameter"); //T's para a primeira curva
+var TC = document.getElementsByClassName("parameter"); 
 var intersectionPoints = [[],[]];
 
 // Algoritmo de De Casteljau
@@ -107,24 +107,21 @@ function subdivide(curve) {
     return [leftSubCurve.concat(leftSubCurveParameters), rightSubCurve.concat(rightSubCurveParameters)];
 }
 
-var tolerancia = 0.1;
+var tolerancia = 0.01;
 function smallEnough(boundingBox) {
     return (boundingBox[2] - boundingBox[0]) * (boundingBox[3] - boundingBox[1]) <= tolerancia;
 }
 
 function addIntersection() {
-    var ul = document.getElementsByClassName("parameter");
+    let ul = document.getElementsByClassName("parameter");
     ul[0].innerHTML = "";
     ul[1].innerHTML = "";
 
     for(let i = 0; i < intersectionPoints.length; i++) {
         for(let j = 0; j < intersectionPoints[i].length; j++) {
-            var li = document.createElement("li");
-            li.appendChild(document.createTextNode(i + ": " + intersectionPoints[i][j]));
+            let li = document.createElement("li");
+            li.appendChild(document.createTextNode("t = " + intersectionPoints[i][j]));
             ul[i].appendChild(li);
         }
     }
-    
-      
-    //TC[curve].innerHTML = "" + t;
 }

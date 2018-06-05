@@ -36,10 +36,35 @@ button#curva1 {
 button#curva2 {
     background-color: green;
     color: yellow;
-    margin-left: 20px;
+    margin-left: 10px;
 }
-ul.parameter{
-    color : white;
+
+#parameters {
+    background-color: blue;
+    position: absolute;
+    right: 0;
+    width: 125px;
+    height: 95%;
+    color: white;
+}
+
+h1 {
+    font-size: 20px;
+    text-align: center;
+}
+
+h1#curve1parameters {
+    background-color: red;
+    color: white;
+}
+
+h1#curve2parameters {
+    background-color: green;
+    color: yellow;
+}
+
+ul li {
+    list-style: none;
 }
 
 canvas {

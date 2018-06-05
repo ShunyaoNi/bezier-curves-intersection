@@ -21,10 +21,15 @@
         <input type="checkbox" onchange="drawPolygons[1] = !drawPolygons[1];"checked />Polígono
         <input type="checkbox" onchange="drawCurves[1] = !drawCurves[1];" checked />Curva
         &emsp;Tolerância:
-        <input type="text" type="number" value="0.1" oninput="tolerancia = this.value;" />
-        <ul class="parameter"></ul>
-        <ul class="parameter"></ul>
+        <input type="text" type="number" value="0.01" oninput="tolerancia = this.value;" />
     </nav>
+
+    <div id="parameters">
+        <h1 id="curve1parameters">CURVA 1</h1>
+        <ul class="parameter"></ul>
+        <h1 id="curve2parameters">CURVA 2</h1>
+        <ul class="parameter"></ul>         
+    </div>
 
     <canvas id="canvas"></canvas>
     <script src="main.js"></script>
